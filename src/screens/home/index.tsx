@@ -45,38 +45,38 @@ export const Home = ({ navigation, route }: any) => {
             <FlatList
                   data={usersData}
                   renderItem={({ item }: any) => (
-                        <View style={{ flex: 1, marginHorizontal: 150, alignContent: 'flex-start', right: 100 }}>
-                              <Image source={require('../../img/profile.jpeg')} style={{ height: 30, width: 30, borderRadius: 15, alignSelf: 'flex-start', right: 40, top: 25 }} resizeMode={'contain'} />
+                        <View style={styled.viewHome}>
+                              <Image source={require('../../img/profile.jpeg')} style={styled.img} resizeMode={'contain'} />
                               <View style={{ flexDirection: 'column' }}>
-                                    <Text style={{ fontWeight: 'bold', fontSize: 14, width: 200 }}> {item.name}</Text>
-                                    <Text style={{ fontWeight: 'bold', fontSize: 10 }}> {item.timeStamp}</Text>
+                                    <Text style={styled.txtName}> {item.name}</Text>
+                                    <Text style={styled.time}> {item.timeStamp}</Text>
                               </View>
-                              <Text style={{ marginTop: 20, width: 300 }}>{item.post}</Text>
-                              <View style={{ height: 0.5, width: 300, backgroundColor: 'brown', marginTop: 20 }} />
-                              <View style={{ flexDirection: 'row', marginHorizontal: 10 }}>
+                              <Text style={styled.post}>{item.post}</Text>
+                              <View style={styled.divider} />
+                              <View style={styled.viewDetail}>
                                     {item.likes == 1 || item.likes > 1 ?
-                                          <Pressable onPress={() => dispatch(myLike(item.id))} style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                                <Image source={require('../../img/like.jpeg')} style={{ height: 35, width: 35, top: 5, }} resizeMode={'contain'} />
-                                                <Text style={{ color: 'red', top: 12, }}>{item.likes}</Text>
+                                          <Pressable onPress={() => dispatch(myLike(item.id))} style={styled.press}>
+                                                <Image source={require('../../img/like.jpeg')} style={styled.imgLike} resizeMode={'contain'} />
+                                                <Text style={styled.txtLike}>{item.likes}</Text>
                                           </Pressable>
                                           :
                                           <Pressable onPress={() => dispatch(myLike(item.id))}>
-                                                <Image source={require('../../img/dislike.jpeg')} style={{ height: 45, width: 45 }} />
+                                                <Image source={require('../../img/dislike.jpeg')} style={styled.imgCommon} />
                                           </Pressable>
                                     }
-                                    <Pressable onPress={() => setComment(item.id)} style={{ height: 45, width: 45, marginHorizontal: 10 }}>
-                                          <Image source={require('../../img/comment.png')} style={{ height: 45, width: 45 }} />
+                                    <Pressable onPress={() => setComment(item.id)} style={styled.pressOne}>
+                                          <Image source={require('../../img/comment.png')} style={styled.imgCommon} />
                                     </Pressable>
-                                    <Text style={{ top: 12, right: 10 }}>{item.comment.length}</Text>
-                                    <View style={{ flexDirection: 'row', flex: 1, right: 20, alignItems: 'center', justifyContent: 'flex-end' }}>
+                                    <Text style={styled.txtLength}>{item.comment.length}</Text>
+                                    <View style={styled.replyView}>
                                           <Pressable onPress={() => navigation.navigate('DetailScreen', { item: item })}>
-                                                <Image source={require('../../img/reply.png')} style={{ alignContent: 'flex-end', height: 20, width: 20 }} />
+                                                <Image source={require('../../img/reply.png')} style={styled.reply} />
                                           </Pressable>
                                     </View>
-                                    <Text style={{ alignSelf: 'center', right: 10 }}>Reply</Text>
+                                    <Text style={styled.txtReply}>Reply</Text>
                               </View>
 
-                              <View style={{ flexDirection: 'row' }}>
+                              <View style={styled.viewComment}>
                                     {comment === item.id ?
 
                                           <TextInput
@@ -88,26 +88,26 @@ export const Home = ({ navigation, route }: any) => {
                                                 keyboardType="default"
                                                 returnKeyType="done"
                                           /> : null}
-                                    {comment === item.id ? <Pressable onPress={() => onPost(item.id)} style={{ alignSelf: 'center' }}>
-                                          <Text style={{ textAlign: 'center', alignSelf: 'center' }}>Post</Text>
+                                    {comment === item.id ? <Pressable onPress={() => onPost(item.id)} style={styled.postPress}>
+                                          <Text style={styled.txtPost}>Post</Text>
                                     </Pressable> : null}
                               </View>
 
                               {item.comment.map(data => {
-                                    return <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    return <View style={styled.viewMore}>
                                           <ViewMoreText
                                                 numberOfLines={3}
                                                 renderViewMore={renderViewMore}
                                                 renderViewLess={renderViewLess}
-                                                textStyle={{ textAlign: 'center', maxWidth: 350, marginHorizontal: 10, }}>
-                                                <Text style={{ textAlign: 'left' }}>
+                                                textStyle={styled.txtCmt}>
+                                                <Text style={styled.data}>
                                                       {data}
                                                 </Text>
                                           </ViewMoreText>
-                                          <View style={{ flexDirection: 'column', }}>
+                                          <View style={styled.viewDot}>
 
                                                 <Pressable onPress={() => setModal(!modal)}>
-                                                      <Image source={require('../../img/dots.png')} style={{ bottom: 10, height: 30, width: 30 }} />
+                                                      <Image source={require('../../img/dots.png')} style={styled.imgDot} />
                                                 </Pressable>
                                           </View>
 

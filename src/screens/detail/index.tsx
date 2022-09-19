@@ -3,6 +3,7 @@ import { Text, View, Image, Pressable, Modal, Alert, StyleSheet } from 'react-na
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch } from "react-redux";
 import { myLike } from "../../redux/actions";
+import { styles } from "./detail-style";
 
 export const DetailScreen = ({ navigation, route }: any) => {
       const [comment, setComment] = useState(null);
@@ -16,34 +17,34 @@ export const DetailScreen = ({ navigation, route }: any) => {
       })
 
       return <SafeAreaView style={[styles.container]}>
-            <View style={{ flex: 1, marginTop: 10 }}>
-                  <Text style={{ marginVertical: 20, marginHorizontal: 20 }}>{item?.post}</Text>
-                  <Image source={require('../../img/user.jpeg')} style={{ height: 150, width: 400, alignSelf: 'center' }} resizeMode={'contain'} />
-                  <View style={{ flexDirection: 'row', marginHorizontal: 10 }}>
+            <View style={styles.viewDetail}>
+                  <Text style={styles.txtPOst}>{item?.post}</Text>
+                  <Image source={require('../../img/user.jpeg')} style={styles.userName} resizeMode={'contain'} />
+                  <View style={styles.viewLike}>
                         {item?.likes ?
                               <Pressable onPress={() => dispatch(myLike(item.id))}>
-                                    <Image source={require('../../img/like.jpeg')} style={{ height: 35, width: 35, top: 5, left: 5 }} resizeMode={'contain'} />
+                                    <Image source={require('../../img/like.jpeg')} style={styles.likeImg} resizeMode={'contain'} />
                               </Pressable>
                               :
                               null
                         }
-                        <Text style={{ left: 5, top: 15 }}>{item?.likes}</Text>
+                        <Text style={styles.txtLike}>{item?.likes}</Text>
                         <Pressable onPress={() => setComment(item.id)}>
-                              <Image source={require('../../img/comment.png')} style={{ height: 45, width: 45 }} />
+                              <Image source={require('../../img/comment.png')} style={styles.imgComment} />
                         </Pressable>
-                        <View style={{ flexDirection: 'row', flex: 1, right: 20, alignItems: 'center', justifyContent: 'flex-end' }}>
+                        <View style={styles.viewReply}>
                               <Pressable onPress={() => navigation.navigate('DetailScreen', { item: item })}>
-                                    <Image source={require('../../img/reply.png')} style={{ alignContent: 'flex-end', height: 20, width: 20 }} />
+                                    <Image source={require('../../img/reply.png')} style={styles.view} />
                               </Pressable>
                         </View>
-                        <Text style={{ alignSelf: 'center', right: 10 }}>Reply</Text>
+                        <Text style={styles.txtReply}>Reply</Text>
                   </View>
-                  <Text style={{ left: 20 }}>{item?.comment}</Text>
+                  <Text style={styles.txtCOmmet}>{item?.comment}</Text>
                   <Pressable onPress={() => null}>
-                        <Image source={require('../../img/like.jpeg')} style={{ height: 15, width: 15, top: 5, left: 30 }} resizeMode={'contain'} />
+                        <Image source={require('../../img/like.jpeg')} style={styles.likeImg1} resizeMode={'contain'} />
                   </Pressable>
-                  <Pressable onPress={() => setModal(!modal)} style={{ alignItems: 'flex-end', right: 20, bottom: 20 }}>
-                        <Image source={require('../../img/dots.png')} style={{ alignItems: 'flex-end', height: 20, width: 20 }} />
+                  <Pressable onPress={() => setModal(!modal)} style={styles.pressView}>
+                        <Image source={require('../../img/dots.png')} style={styles.imgDots} />
                   </Pressable>
                   <Modal
                         animationType="slide"
@@ -70,58 +71,3 @@ export const DetailScreen = ({ navigation, route }: any) => {
             </View>
       </SafeAreaView>
 }
-const styles = StyleSheet.create({
-      container: {
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center"
-      },
-      input: {
-            height: 40,
-            margin: 12,
-            borderWidth: 1,
-            padding: 10,
-            maxWidth: 300
-      },
-      centeredView: {
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-            marginTop: 22
-      },
-      modalView: {
-            margin: 20,
-            backgroundColor: "white",
-            borderRadius: 20,
-            padding: 35,
-            alignItems: "center",
-            shadowColor: "#000",
-            shadowOffset: {
-                  width: 0,
-                  height: 2
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 4,
-            elevation: 5
-      },
-      button: {
-            borderRadius: 20,
-            padding: 10,
-            elevation: 2
-      },
-      buttonOpen: {
-            backgroundColor: "#F194FF",
-      },
-      buttonClose: {
-            backgroundColor: "#2196F3",
-      },
-      textStyle: {
-            color: "white",
-            fontWeight: "bold",
-            textAlign: "center"
-      },
-      modalText: {
-            marginBottom: 15,
-            textAlign: "center"
-      }
-});
