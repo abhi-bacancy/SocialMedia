@@ -1,0 +1,10 @@
+const USER = {
+    LOAD: "REQUEST_USERS_DATA",
+    LOAD_SUCCESS: "RECEIVE_USERS_DATA",
+  };
+  const LIKES = {
+    LOAD: "REQUEST_LIKES_DATA",
+    LOAD_SUCCESS: "RECEIVE_LIKES_DATA",
+  };
+  
+  export default {USER, LIKES};
